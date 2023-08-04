@@ -6,7 +6,8 @@
     "dev": "remix dev",
     "typecheck": "tsc",
     "prisma": "npx prisma studio",
-    "db" : "pscale connect remix-social main"
+    "db" : "pscale connect remix-social main",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.1.0",
