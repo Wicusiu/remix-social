@@ -29,4 +29,14 @@ model User {
   hashedPassword String
   role           String   @default("USER")
   posts          Post[]
+  messages       Message[]
+}
+
+model Message {
+  id             String   @id @default(uuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  content        String?
+  author         User?    @relation(fields: [authorId], references: [id])
+  authorId       String?
 }
