@@ -2,7 +2,9 @@ import { ActionFunction, json, redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import { ComponentPropsWithoutRef } from "react";
 import { Button } from "~/components/Button";
+import { authenticator } from "~/services/auth.server";
 import { createPost } from "~/services/posts.server";
+import { commitSession } from "~/services/session.server";
 import { CreatePost } from "~/services/validations";
 
 type ActionData = {
@@ -20,6 +22,8 @@ type ActionData = {
   }
   
   export const action: ActionFunction = async ({request}) => {
+    const user = await authenticator.isAuthenticated(request, {failureRedirect: '/login'})
+
     const form = await request.formData()
     const rawTitle = form.get('title')
     const rawBody = form.get('body')
@@ -41,7 +45,7 @@ type ActionData = {
     await createPost({
       title: result.data.title ?? null,
       body: result.data.body,
-      authorId: 'bad-id',
+      authorId: user.id,
     })
   
     return redirect('/')
