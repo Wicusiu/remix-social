@@ -9,7 +9,7 @@ const {getSession, commitSession, destroySession} = createCookieSessionStorage({
     // all of these are optional
     domain:
       process.env.NODE_ENV === 'production'
-        ? 'remix-social-omega.vercel.app'
+        ? 'remix-social-nine.vercel.app'
         : undefined,
     expires: new Date(Date.now() + 60_00000),
     httpOnly: true,
