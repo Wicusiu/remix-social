@@ -29,8 +29,9 @@ export default function Index() {
       <h1 className="text-3xl font-bold underline">Remix Social</h1>
       
       <ul className="w-5/6 flex flex-col gap-4">
-        {posts.map((post) => (
-          <li key={post.body}>
+        {posts.map((post) => {
+          console.log(post) 
+          return <li key={post.body}>
             <PostComponent
               header={post?.title}
               authorName={post?.author?.email}
@@ -38,10 +39,10 @@ export default function Index() {
               {post.body}
             </PostComponent>
           </li>
-        ))}
+      })}
       </ul>
 
-      <Link to={'/new'}>Create an new one</Link>
+      <Link to={'/new'} prefetch="intent">Create an new one</Link>
     </div>
   );
 }

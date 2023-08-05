@@ -4,7 +4,7 @@ import { db } from '~/services/db.server'
 export type{Post} from '@prisma/client' 
 
 export const getPosts = () => {
-    return db.post.findMany()
+  return db.post.findMany({include: {author: {select: {email: true, id: true}}}})
 }
 
 export type CreatePostArgs = Pick<Post, 'title' | 'body' | 'authorId'>
